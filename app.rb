@@ -48,7 +48,7 @@ def process_query(command, hue)
   elsif command.scan(/lights | light/).length > 0
     p 'Welcome to Hue Control'
     process_lights(command, nil)
-  elsif command.scan(/setting/).length > 0
+  elsif command.scan(/setting | mode/).length > 0
     p 'Welcome to mode Control'
     process_mode(command, hue)
   end
