@@ -10,8 +10,10 @@ def process_mode(command, hue)
     if command.scan(/random/).length > 0
       playlists = RSpotify::Playlist.search('420')
       Launchy.open playlists.sample.instance_variable_get('@external_urls').values[0]
+      WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
     else
       Launchy.open ('https://open.spotify.com/user/1215877715/playlist/6WkKK7hw0ZWttRrdPMXIbG')
+      WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
     end
 
   elsif command.scan(/valve | volvo/).length > 0
