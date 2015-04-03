@@ -12,10 +12,16 @@ require 'win32ole'
 
 require './modules/spotify'
 require './modules/itunes'
-require './modules/spot_search'
 require './modules/pulse'
 require './modules/lights'
 require './modules/mode'
+require './modules/twitch'
+
+
+require 'open-uri'
+require 'json'
+
+
 
 require 'numbers_in_words'
 require 'numbers_in_words/duck_punch'
@@ -50,6 +56,9 @@ def process_query(command, hue)
   elsif command.scan(/setting/).length > 0
     p 'Welcome to mode Control'
     process_mode(command, hue)
+  elsif command.scan(/twitch/).length > 0
+    p 'Welcome to Twitch Control'
+    process_twitch(command, hue)
   end
 end
 

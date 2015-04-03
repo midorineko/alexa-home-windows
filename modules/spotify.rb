@@ -1,7 +1,6 @@
 require 'rspotify'
 require 'watir-webdriver'
 require 'launchy'
-require_relative './spot_search.rb'
 
 def process_spotify(command, hue)
   RSpotify.authenticate("edc6b110ccfb40f68390945a1ed88b73", "c355cfe898f8471e84966da16772be1e")

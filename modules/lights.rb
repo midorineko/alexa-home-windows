@@ -14,3 +14,4 @@ def process_lights(command, hue)
   end
 
 end
+
