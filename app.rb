@@ -4,6 +4,7 @@ require './helpers'
 require 'rspotify'
 require 'launchy'
 require 'watir-webdriver'
+require 'philips_hue'
 
 # require 'appscript'
 # require 'osax'
@@ -13,7 +14,7 @@ require './modules/spotify'
 require './modules/itunes'
 require './modules/spot_search'
 require './modules/pulse'
-require './modules/pulse'
+require './modules/lights'
 
 require 'numbers_in_words'
 require 'numbers_in_words/duck_punch'
@@ -38,8 +39,8 @@ def process_query(command)
     p 'Welcome to Pulse Control'
     process_abort(command)
   elsif command.scan(/lights | light/).length > 0
-    p 'Welcome to Pulse Control'
-    process_abort(command)
+    p 'Welcome to Hue Control'
+    process_lights(command)
   end
 end
 

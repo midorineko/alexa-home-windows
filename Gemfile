@@ -5,6 +5,8 @@ gem 'sinatra'
 
 gem 'pry'
 
+gem 'philips_hue'
+
 gem 'numbers_in_words'
 
 gem 'activerecord'
@@ -22,7 +24,6 @@ gem 'windows-api', '~> 0.4.4'
 # gem 'rb-appscript', '~> 0.6.1'
 
 gem 'thin'
-gem 'philips_hue'
 
 group :development do
   gem 'sqlite3'
