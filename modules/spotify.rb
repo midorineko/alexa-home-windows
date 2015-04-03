@@ -62,10 +62,7 @@ def process_spotify(command)
     end
   elsif command.scan(/style/).length > 0
     playlists = RSpotify::Playlist.search(search_track)
-    playlist = playlists.sample
-    play_tracks = playlist.tracks
-    rand_track = playlist.tracks.sample
-    pre_track.next_song(rand_track, play_tracks, "random")
+    Launchy.open playlists.sample.instance_variable_get('@external_urls').values[0]
   end
 
 end

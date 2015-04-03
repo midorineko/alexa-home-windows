@@ -21,7 +21,6 @@ require 'numbers_in_words'
 require 'numbers_in_words/duck_punch'
 
 hue = PhilipsHue::Bridge.new("my light app", "10.0.1.8")
-light1, light2 = hue.lights
 RSpotify.authenticate("edc6b110ccfb40f68390945a1ed88b73", "c355cfe898f8471e84966da16772be1e")
 
 def process_query(command, hue)
@@ -47,8 +46,8 @@ def process_query(command, hue)
     process_abort(command, nil)
   elsif command.scan(/lights | light/).length > 0
     p 'Welcome to Hue Control'
-    process_lights(command, nil)
-  elsif command.scan(/setting | mode/).length > 0
+    process_lights(command, hue)
+  elsif command.scan(/setting/).length > 0
     p 'Welcome to mode Control'
     process_mode(command, hue)
   end
