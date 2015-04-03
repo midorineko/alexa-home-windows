@@ -1,4 +1,4 @@
-def process_lights(command)
+def process_lights(command, hue)
   words = command.split(" ")
 
   hue = PhilipsHue::Bridge.new("my light app", "10.0.1.8")
@@ -11,6 +11,11 @@ def process_lights(command)
   elsif command.scan(/on/).length > 0
     light1.on!
     light2.on!
+
+  elsif command.scan(/mode/).length > 0
+    light1.on!
+    light2.on!
+
   end
 
 end
