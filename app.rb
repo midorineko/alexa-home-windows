@@ -13,6 +13,7 @@ require './modules/spotify'
 require './modules/itunes'
 require './modules/spot_search'
 require './modules/pulse'
+require './modules/pulse'
 
 require 'numbers_in_words'
 require 'numbers_in_words/duck_punch'
@@ -30,10 +31,13 @@ def process_query(command)
   elsif command.scan(/itunes/).length > 0
     p "I hear you say itunes"
     process_itunes(command)
-  elsif command.scan(/initiate/).length > 0
+  elsif command.scan(/initiate | pulse/).length > 0
     p 'Welcome to Pulse Control'
     process_initiate(command)
   elsif command.scan(/abort/).length > 0
+    p 'Welcome to Pulse Control'
+    process_abort(command)
+  elsif command.scan(/lights | light/).length > 0
     p 'Welcome to Pulse Control'
     process_abort(command)
   end
