@@ -35,7 +35,7 @@ def live(life, light2)
   else
     lit = light2.green
   end
-  lit
+  lit;
   light2.blip
   return lit
 end
@@ -115,9 +115,10 @@ end
     Launchy.open(games[hero][3])
   end
 
-
-  if command.scan(/watch/).length > 0
-    which_stream = words.pop.in_numbers
+  if command.scan(/watch | what's | stream/).length > 0
+    which_stream = words.pop
+    which_stream = words[-1] if which_stream == 'stop'
+    which_stream = which_stream.in_numbers
     watch_specific_game(need_to_watch, light1, light2, which_stream)
   end
 

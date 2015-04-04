@@ -27,6 +27,8 @@ def process_spotify(command, hue)
     WIN32OLE.new("WScript.Shell").SendKeys("^{F7}")
   elsif command.scan(/previous/).length > 0
     WIN32OLE.new("WScript.Shell").SendKeys("^{F5}")
+  elsif command.scan(/previous/).length > 0
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F5}")
   end
 
 
