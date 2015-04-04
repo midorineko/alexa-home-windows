@@ -43,13 +43,13 @@ def process_query(command, hue)
     process_spotify(command, nil)
   elsif command.scan(/itunes/).length > 0
     p "I hear you say itunes"
-    process_itunes(command, nil)
-  elsif command.scan(/initiate | pulse/).length > 0
+    process_itunes(command, hue)
+  elsif command.scan(/initiate | pulse | computer/).length > 0
     p 'Welcome to Pulse Control'
-    process_initiate(command, nil)
+    process_initiate(command, hue)
   elsif command.scan(/abort/).length > 0
     p 'Welcome to Pulse Control'
-    process_abort(command, nil)
+    process_abort(command, hue)
   elsif command.scan(/lights | light/).length > 0
     p 'Welcome to Hue Control'
     process_lights(command, hue)

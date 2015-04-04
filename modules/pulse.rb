@@ -1,4 +1,6 @@
-def process_initiate(command)
+def process_initiate(command, hue)
+
+  light1, light2 = hue.lights
 words = command.split(" ")
 
 
@@ -8,10 +10,10 @@ words = command.split(" ")
     end
 
   elsif command.scan(/termination|terminate/).length > 0
+    light1.off!
+    light2.off!
     if command.scan(/now/).length > 0
-
       system("shutdown.exe -s -f -t 0")
-
     end
     termination_count = words.pop.in_numbers
     system("shutdown.exe -s -f -t #{termination_count}")
