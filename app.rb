@@ -4,7 +4,7 @@ require './helpers'
 require 'rspotify'
 require 'launchy'
 require 'watir-webdriver'
-require 'philips_hue'
+
 
 # require 'appscript'
 # require 'osax'
@@ -20,7 +20,7 @@ require './modules/twitch'
 
 require 'open-uri'
 require 'json'
-
+require 'philips_hue'
 
 
 require 'numbers_in_words'
@@ -30,14 +30,11 @@ hue = PhilipsHue::Bridge.new("my light app", "10.0.1.8")
 RSpotify.authenticate("edc6b110ccfb40f68390945a1ed88b73", "c355cfe898f8471e84966da16772be1e")
 
 def process_query(command, hue)
-
-
   p '=============================================================='
   p command.split(" ")
   p '=============================================================='
 
   p 'i hear commands'
-  # HUE LIGHTS #
   if command.scan(/spotify/).length > 0
     p "I hear you say spotify"
     process_spotify(command, nil)
@@ -53,12 +50,15 @@ def process_query(command, hue)
   elsif command.scan(/lights | light/).length > 0
     p 'Welcome to Hue Control'
     process_lights(command, hue)
-  elsif command.scan(/setting/).length > 0
+  elsif command.scan(/setting|session/).length > 0
     p 'Welcome to mode Control'
     process_mode(command, hue)
   elsif command.scan(/twitch/).length > 0
     p 'Welcome to Twitch Control'
     process_twitch(command, hue)
+  elsif command.scan(/room/).length > 0
+    p 'Welcome to Room Control'
+    process_room(command, hue) #held within the light module
   end
 end
 

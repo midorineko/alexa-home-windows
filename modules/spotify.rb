@@ -20,13 +20,11 @@ def process_spotify(command, hue)
   search_track = track_name.join(" ")
 
   if command.scan(/run/).length > 0
-    WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F6}")
   elsif command.scan(/off/).length > 0
     WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
   elsif command.scan(/next/).length > 0
     WIN32OLE.new("WScript.Shell").SendKeys("^{F7}")
-  elsif command.scan(/previous/).length > 0
-    WIN32OLE.new("WScript.Shell").SendKeys("^{F5}")
   elsif command.scan(/previous/).length > 0
     WIN32OLE.new("WScript.Shell").SendKeys("^{F5}")
   end

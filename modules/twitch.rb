@@ -107,19 +107,19 @@ end
     end
   end
 
-  def watch_specific_game(games, light1, light2, num)
-    num == 0 ? num = games.keys.length - 1 : num = num
+  def watch_specific_game(games, light1, light2, num, urls)
+    num == 0 ? num = games.keys.length - 1 : num = games.keys.length - num
     hero = games.keys[num]
     light1.xy = games[hero][0]
     light2.xy = games[hero][1]
-    Launchy.open(games[hero][3])
+    games.empty? ? Launchy.open(urls.first) : Launchy.open(games[hero][3])
   end
 
   if command.scan(/watch | what's | stream/).length > 0
     which_stream = words.pop
     which_stream = words[-1] if which_stream == 'stop'
     which_stream = which_stream.in_numbers
-    watch_specific_game(need_to_watch, light1, light2, which_stream)
+    watch_specific_game(need_to_watch, light1, light2, which_stream, url)
   end
 
 end
