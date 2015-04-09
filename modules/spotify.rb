@@ -39,7 +39,6 @@ def process_spotify(command, hue)
 
     Launchy.open uri #actually now it is the export url
   elsif command.scan(/artist/).length > 0
-    p 'hgere in artisajkldhfjasnfvckjahnsvdkjasnvkjav'
     artists = RSpotify::Artist.search(search_track)
     art = artists.first
     WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
@@ -58,4 +57,57 @@ def process_spotify(command, hue)
     Launchy.open playlists.sample.instance_variable_get('@external_urls').values[0]
   end
 
+end
+
+
+def process_audio (input, hue) #speaker controll
+  if input == 'headphones'
+    p 'Headphones'
+    light1, light2 = hue.lights
+    light1_state = light1.xy
+    light2_state = light2.xy
+    light1.red
+    light2.red
+    sleep 1
+    light1.xy = light1_state
+    light2.xy = light2_state
+  elsif input == 'speakers'
+    light1, light2 = hue.lights
+    light1_state = light1.xy
+    light2_state = light2.xy
+    light1.blue
+    light2.blue
+    sleep 1
+    light1.xy = light1_state
+    light2.xy = light2_state
+  elsif input == 'volume_up'
+
+    light1, light2 = hue.lights
+    light1_state = light1.xy
+    light2_state = light2.xy
+    light1.xy = [0.3739, 0.2445]
+    light2.xy = [0.3739, 0.2445]
+    sleep 1
+    light1.xy = light1_state
+    light2.xy = light2_state
+  elsif input == 'volume_down'
+
+    light1, light2 = hue.lights
+    light1_state = light1.xy
+    light2_state = light2.xy
+    light1.xy  = [0.6413, 0.3513]
+    light2.xy  = [0.6413, 0.3513]
+    sleep 1
+    light1.xy = light1_state
+    light2.xy = light2_state
+  elsif input == 'volume_mute'
+    light1, light2 = hue.lights
+    light1_state = light1.xy
+    light2_state = light2.xy
+    light1.red
+    light2.red
+    sleep 1
+    light1.xy = light1_state
+    light2.xy = light2_state
+  end
 end

@@ -21,7 +21,7 @@ gem 'launchy'
 gem 'anyplayer', '~> 1.1.4'
 gem 'windows-api', '~> 0.4.4'
 
-# gem 'rb-appscript', '~> 0.6.1'
+gem 'weather-api', '~> 1.1.1'
 
 gem 'thin'
 
