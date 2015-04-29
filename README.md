@@ -1,6 +1,6 @@
 # Alexa Home
 
-Welcome to Alexa Home Midori Style! I lvoe the amazon echo, but the lack of support for applications I love is eating me alive. I am currently adapating Zfeldmans original use of Alexa-Home, to help build applications that make alexa work more seamlessly with my current home setup.
+Welcome to Alexa Home Midori Style! I love the amazon echo, but the lack of support for applications is eating me alive. I am currently adapating Zfeldmans original use of Alexa-Home, to help build applications that make alexa work more seamlessly with my current home setup.
 
 
 ## Setting up
