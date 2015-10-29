@@ -1,8 +1,7 @@
 def process_initiate(command, hue)
 
-  light1, light2 = hue.lights
-words = command.split(" ")
-
+  light1, light2, light3 = hue.lights
+  words = command.split(" ")
 
   if command.scan(/game/).length > 0
     if command.scan(/one/).length > 0
@@ -12,6 +11,7 @@ words = command.split(" ")
   elsif command.scan(/termination|terminate/).length > 0
     light1.off!
     light2.off!
+    light3.off!
     if command.scan(/now/).length > 0
       system("shutdown.exe -s -f -t 0")
     end
@@ -22,8 +22,6 @@ words = command.split(" ")
 end
 
 def process_abort(command)
-  words = command.split(" ")
-
   if command.scan(/game/).length > 0
     if command.scan(/one/).length > 0
       p "excellent!"

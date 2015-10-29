@@ -3,7 +3,7 @@ def process_twitch(command, hue)
   ENV["SSL_CERT_FILE"] = "C:/Ruby21/lib/ruby/2.1.0/rubygems/ssl_certs/cacert.pem"
   dota = JSON.parse open('https://api.twitch.tv/kraken/streams?limit=10&game=Dota%202').read
   active_streams = dota['streams']
-  light1, light2 = hue.lights
+  light1, light2, light3 = hue.lights
 
   streamers = []
   viewer_count = []
@@ -35,7 +35,7 @@ def live(life, light2)
   else
     lit = light2.green
   end
-  lit;
+  lit
   light2.blip
   return lit
 end
@@ -44,27 +44,35 @@ end
     if name == 'Sing_sing'
       light1.xy = [0.3739, 0.2445]
       light2.xy = [0.3739, 0.2445]
+      light3.xy = [0.3739, 0.2445]
       light2.blip
       light1.blip
+      light3.blip
       sleep 2
       need_to_watch[name] = [[0.3739, 0.2445], [0.3739, 0.2445], viewer_count[i], url[i]]
     elsif name == 'MerliniDota'
       light1.xy = [0.2657, 0.4364]
       light2.xy = [0.2657, 0.4364]
+      light3.xy = [0.2657, 0.4364]
       light2.blip
+      light3.blip
       light1.blip
       sleep 2
       need_to_watch[name] = [[0.2657, 0.4364], [0.2657, 0.4364], viewer_count[i], url[i]]
     elsif name == 'Pyrionflax'
       light1.xy = [0.3739, 0.2445]
       light2.xy = [0.3739, 0.2445]
+      light3.xy = [0.3739, 0.2445]
       light2.blip
+      light3.blip
       light1.blip
       sleep 2
       need_to_watch[name] = [[0.3739, 0.2445], [0.3739, 0.2445], viewer_count[i], url[i]]
     elsif name == 'EternaLEnVyy'
       light1.xy = [0.3739, 0.2445]
       light2.xy = [0.3739, 0.2445]
+      light3.xy = [0.3739, 0.2445]
+      light3.blip
       light2.blip
       light1.blip
       sleep 2
@@ -72,6 +80,8 @@ end
     elsif name ==  'WagamamaTV'
       light1.xy  = [0.4951, 0.4807]
       light2.xy  = [0.4951, 0.4807]
+      light3.xy  = [0.4951, 0.4807]
+      light3.blip
       light2.blip
       light1.blip
       sleep 2
@@ -79,28 +89,39 @@ end
     elsif name ==  'BananaSlamJamma'
       light1.xy  = [0.6413, 0.3513]
       light2.xy  = [0.6413, 0.3513]
+      light3.xy  = [0.6413, 0.3513]
       light2.blip
+      light3.blip
       light1.blip
       sleep 2
       need_to_watch[name] = [[0.6413, 0.3513], [0.6413, 0.3513], viewer_count[i], url[i]]
     elsif name ==  'BeyondTheSummit'
       light1.xy  = [0.2162, 0.108]
+      light3.xy  = [0.2162, 0.108]
+      light3.blip
       light1.blip
-      live = status[i]["REBROADCAST"] ?  false : true
+      status = status[i].upcase
+      live = status ?  false : true
       live(live, light2)
       sleep 2
       need_to_watch[name] = [[0.2162, 0.108], live(live, light2), viewer_count[i], url[i], live]
     elsif name == 'dotastarladder_en'
       light1.xy  = [0.2127, 0.1076]
+      light3.xy  = [0.2127, 0.1076]
       light1.blip
-      live = status[i]["REBROADCAST"] ?  false : true
+      light3.blip
+      status = status[i].upcase
+      live = status ?  false : true
       live(live, light2)
       sleep 2
       need_to_watch[name] = [[0.2127, 0.1076], live(live, light2), viewer_count[i], url[i], live]
     elsif name == 'joindotared'
       light1.xy = [0.525, 0.2228]
+      light3.xy = [0.525, 0.2228]
       light1.blip
-      live = status[i]["REBROADCAST"] ?  false : true
+      light3.blip
+      status = status[i].upcase
+      live = status ?  false : true
       live(live, light2)
       sleep 2
       need_to_watch[name] = [[0.525, 0.2228], live(live, light2), viewer_count[i], url[i], live]

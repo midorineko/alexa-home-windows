@@ -2,9 +2,10 @@ require 'weather-api'
 
 def process_weather(command, hue)
   response = Weather.lookup(12797158, Weather::Units::CELSIUS)
-  light1, light2 = hue.lights
+  light1, light2, light3 = hue.lights
   light1_state = light1.xy
   light2_state = light2.xy
+  light3_state = light3.xy
   temp = (response.condition.temp * 9/5 + 32)
   code = response.condition.code
   p '--------------------------------------------------------------------------------------'
@@ -15,18 +16,25 @@ def process_weather(command, hue)
 
   if temp > 90
     light1.xy = [0.7035, 0.2958]
+    light3.xy = [0.7035, 0.2958]
   elsif temp > 80
     light1.xy = [0.5717, 0.4061]
+    light3.xy = [0.5717, 0.4061]
   elsif temp > 70
     light1.xy = [0.5717, 0.4061]
+    light3.xy = [0.5717, 0.4061]
   elsif temp > 60
     light1.xy = [0.4204, 0.4822]
+    light3.xy = [0.4204, 0.4822]
   elsif temp > 50
     light1.xy = [0.2623, 0.3547]
+    light3.xy = [0.2623, 0.3547]
   elsif temp > 40
     light1.xy = [0.1445, 0.0832]
+    light3.xy = [0.1445, 0.0832]
   else
     light1.xy = [0.3103, 0.3289]
+    light3.xy = [0.3103, 0.3289]
   end
 
   if [26, 27, 28, 29, 30, 44].include? code #cloudy
@@ -46,4 +54,5 @@ def process_weather(command, hue)
   sleep 5
   light1.xy = light1_state
   light2.xy = light2_state
+  light3.xy = light3_state
 end
