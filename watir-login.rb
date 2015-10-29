@@ -42,7 +42,7 @@ class AlexaCrawler
     email.set "steven.inouye91@gmail.com"
 
     password = browser.text_field id: 'ap_password'
-    password.set "yJ9hScrZ#p"
+    password.set "iuwhejnwker98#p"
 
     browser.button(id: "signInSubmit-input").click
 
