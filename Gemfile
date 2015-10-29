@@ -25,6 +25,8 @@ gem 'weather-api', '~> 1.1.1'
 
 gem 'thin'
 
+gem 'java'
+
 group :development do
   gem 'sqlite3'
 end

@@ -17,6 +17,7 @@ require './modules/lights'
 require './modules/mode'
 require './modules/twitch'
 require './modules/weather'
+require './modules/ambient'
 
 
 require 'open-uri'
@@ -27,7 +28,7 @@ require 'philips_hue'
 require 'numbers_in_words'
 require 'numbers_in_words/duck_punch'
 
-hue = PhilipsHue::Bridge.new("my light app", "10.0.1.8")
+hue = PhilipsHue::Bridge.new("my light app", "10.0.1.6")
 RSpotify.authenticate("edc6b110ccfb40f68390945a1ed88b73", "c355cfe898f8471e84966da16772be1e")
 
 
@@ -40,7 +41,7 @@ def process_query(command, hue)
   p 'i hear commands'
   if command.scan(/spotify/).length > 0
     p "I hear you say spotify"
-    process_spotify(command, nil)
+    process_spotify(command, hue)
   elsif command.scan(/itunes/).length > 0
     p "I hear you say itunes"
     process_itunes(command, hue)
@@ -85,12 +86,19 @@ def process_query(command, hue)
   elsif command.scan(/weather/).length > 0
     p 'Tell me the weather'
     process_weather(command, hue) #held within light module
+  elsif command.scan(/poop/).length > 0
+    process_ambient(command, hue) #held within light module
   end
 end
 
 
 
 get '/command' do
+  process_query(params[:q], hue)
+end
+
+get '/we' do
+  p 'meow cat'
   process_query(params[:q], hue)
 end
 
