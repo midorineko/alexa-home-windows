@@ -32,12 +32,15 @@ This has to be run on the same network your Hue is on, but not necessarily the s
 
 3) Run `bundle install` (I'm assuming you have Ruby 2.0+, using `ruby -v` to find out, if not try rbenv or rvm to upgrade).
 
-3) If you plan on using a Hue setup, press the button on top of your Hue unit
+3) If you plan on using a Hue setup, go to https://www.meethue.com/api/nupnp and infd you internal IP address
+----insert it in line 32 of app.rb
 
-4) Go to your echo application on the browser, find the settings tab, go to history, open up the console then paster the monitoring snippet.
+4) Go to ech.amazon.com on the browser, find the settings tab, go to history, open up the console then paste the monitoring snippet.
 ---really sorry that isn't easier on windows. I'll figure out a way soon, since it is so kinda sucks.
+****I just wrote a script that will do all this for you and hide it off screen. Will post it soon.
 
  5)I run the program with ruby app.rb like normal.
+ ****I made an auto run script for windows. Using this stackoverflow. http://stackoverflow.com/questions/23205169/auto-run-ruby-script-on-windows-start
 
  Current Modules
  -Hue lights
