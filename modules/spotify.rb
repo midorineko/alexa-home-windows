@@ -1,9 +1,8 @@
 require 'rspotify'
 require 'watir-webdriver'
 require 'launchy'
-require_relative './spot_search.rb'
 
-def process_spotify(command)
+def process_spotify(command, hue)
   RSpotify.authenticate("edc6b110ccfb40f68390945a1ed88b73", "c355cfe898f8471e84966da16772be1e")
   words = command.split(" ")
   words
@@ -14,8 +13,6 @@ def process_spotify(command)
     track_name = words.drop(3)
   end
 
-  # track_name = ["born", "sinner", "stop"]
-
   if track_name.last == 'stop'
     track_name.pop
   end
@@ -23,49 +20,77 @@ def process_spotify(command)
   search_track = track_name.join(" ")
 
   if command.scan(/run/).length > 0
-    play_pause()
-  elsif command.scan(/off/).length > 0
     WIN32OLE.new("WScript.Shell").SendKeys("^{F6}")
-
-    stop()
-    return
+  elsif command.scan(/off/).length > 0
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
+  elsif command.scan(/next/).length > 0
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F7}")
+  elsif command.scan(/previous/).length > 0
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F5}")
   end
 
-  pre_track = Playback.new
-  if $FIRST_TRACK
-    $FIRST_TRACK.finished()
-  end
-  $FIRST_TRACK = pre_track
+
   if command.scan(/track/).length > 0
+
     tracks = RSpotify::Track.search(search_track)
     first_track = tracks.first
     uri = first_track.instance_variable_get('@external_urls').values[0]
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
 
     Launchy.open uri #actually now it is the export url
   elsif command.scan(/artist/).length > 0
     artists = RSpotify::Artist.search(search_track)
     art = artists.first
-    top_tracks = art.top_tracks(:US)
-    rand_track = art.top_tracks(:US).sample
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
 
-    pre_track.next_song(rand_track, top_tracks, "random")
+    Launchy.open art.instance_variable_get('@external_urls').values[0]
   elsif command.scan(/album/).length > 0
     albums = RSpotify::Album.search(search_track)
     album = albums.first
-    tracks = album.tracks
-    if command.scan(/random/).length > 0
-      rand_track = tracks.sample
-      pre_track.next_song(rand_track, tracks, "random")
-    else
-      first_track = tracks[1]
-      pre_track.next_song(first_track, tracks, 0)
-    end
-  elsif command.scan(/style/).length > 0
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
+
+    Launchy.open album.instance_variable_get('@external_urls').values[0]
+  elsif command.scan(/style|playlist/).length > 0
     playlists = RSpotify::Playlist.search(search_track)
-    playlist = playlists.sample
-    play_tracks = playlist.tracks
-    rand_track = playlist.tracks.sample
-    pre_track.next_song(rand_track, play_tracks, "random")
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
+
+    Launchy.open playlists.sample.instance_variable_get('@external_urls').values[0]
   end
 
+end
+
+def process_audio (input, hue) #speaker control
+  light1, light2, light3 = hue.lights
+  # light1.on!
+  # light2.on!
+  # light3.on!
+  light1_state = light1.xy
+  light2_state = light2.xy
+  light3_state = light3.xy
+  if input == 'headphones'
+    p 'Headphones'
+    light1.red
+    light2.red
+    light3.red
+  elsif input == 'speakers'
+    light1.blue
+    light2.blue
+    light3.blue
+  elsif input == 'volume_up'
+    light1.xy = [0.3739, 0.2445]
+    light2.xy = [0.3739, 0.2445]
+    light3.xy = [0.3739, 0.2445]
+  elsif input == 'volume_down'
+    light1.xy  = [0.6413, 0.3513]
+    light2.xy  = [0.6413, 0.3513]
+    light3.xy  = [0.6413, 0.3513]
+  elsif input == 'volume_mute'
+    light1.red
+    light2.red
+    light3.red
+  end
+  sleep 1
+  light1.xy = light1_state
+  light2.xy = light2_state
+  light3.xy = light3_state
 end

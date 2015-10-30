@@ -5,42 +5,104 @@ require 'rspotify'
 require 'launchy'
 require 'watir-webdriver'
 
+
 # require 'appscript'
 # require 'osax'
 require 'win32ole'
 
 require './modules/spotify'
 require './modules/itunes'
-require './modules/spot_search'
 require './modules/pulse'
+require './modules/lights'
+require './modules/mode'
+require './modules/twitch'
+require './modules/weather'
+require './modules/ambient'
+
+require './runamz.rb' #this is how I am going to open and execute settings. blocked until i can hide password reliably
+
+require 'open-uri'
+require 'json'
+require 'philips_hue'
+
 
 require 'numbers_in_words'
 require 'numbers_in_words/duck_punch'
 
-def process_query(command)
+hue = PhilipsHue::Bridge.new("my light app", "10.0.1.6")
+RSpotify.authenticate("edc6b110ccfb40f68390945a1ed88b73", "c355cfe898f8471e84966da16772be1e")
+
+open_amz(hue)
+
+def process_query(command, hue)
   p '=============================================================='
   p command.split(" ")
   p '=============================================================='
 
   p 'i hear commands'
-  # HUE LIGHTS #
   if command.scan(/spotify/).length > 0
     p "I hear you say spotify"
-    process_spotify(command)
+    process_spotify(command, hue)
   elsif command.scan(/itunes/).length > 0
     p "I hear you say itunes"
-    process_itunes(command)
-  elsif command.scan(/initiate/).length > 0
+    process_itunes(command, hue)
+  elsif command.scan(/initiate | pulse | computer/).length > 0
     p 'Welcome to Pulse Control'
-    process_initiate(command)
+    process_initiate(command, hue)
   elsif command.scan(/abort/).length > 0
     p 'Welcome to Pulse Control'
-    process_abort(command)
+    process_abort(command, hue)
+  elsif command.scan(/lights | light/).length > 0
+    p 'Welcome to Hue Control'
+    process_lights(command, hue)
+  elsif command.scan(/setting|session/).length > 0
+    p 'Welcome to mode Control'
+    process_mode(command, hue)
+  elsif command.scan(/twitch/).length > 0
+    p 'Welcome to Twitch Control'
+    process_twitch(command, hue)
+  elsif command.scan(/room/).length > 0
+    p 'Welcome to Room Control'
+    process_room(command, hue) #held within the light module
+  elsif command.scan(/headphones/).length > 0
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F12}") #held within the light module
+    process_audio('headphones', hue) #held within spotify
+  elsif command.scan(/speakers/).length > 0
+    p 'Speakers'
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F11}") #held within the light module
+    process_audio('speakers', hue)
+  elsif command.scan(/microphone/).length > 0
+    p 'Speakers'
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F10}") #held within the light module
+    process_audio('speakers', hue)
+  elsif command.scan(/louder/).length > 0
+    p 'Volume Up'
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F3}")#held within the light module
+    process_audio('volume_up', hue)
+  elsif command.scan(/lower/).length > 0
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F2}")#held within the light module
+    p 'Volume Down'
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F2}") #held within the light module
+    process_audio('volume_down', hue)
+  elsif command.scan(/mute/).length > 0
+    p 'Volume Mute'
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F1}") #held within the light module
+    process_audio('volume_mute', hue)
+  elsif command.scan(/weather/).length > 0
+    p 'Tell me the weather'
+    process_weather(command, hue) #held within light module
+  elsif command.scan(/poop/).length > 0
+    process_ambient(command, hue) #held within light module
   end
 end
 
 get '/command' do
-  process_query(params[:q])
+  process_query(params[:q], hue)
+end
+
+get '/we' do
+  p 'meow cat'
+  process_query(params[:q], hue)
 end
 
 get '/status' do
