@@ -19,6 +19,7 @@ require './modules/twitch'
 require './modules/weather'
 require './modules/ambient'
 
+require './runamz.rb' #this is how I am going to open and execute settings. blocked until i can hide password reliably
 
 require 'open-uri'
 require 'json'
@@ -31,7 +32,7 @@ require 'numbers_in_words/duck_punch'
 hue = PhilipsHue::Bridge.new("my light app", "10.0.1.6")
 RSpotify.authenticate("edc6b110ccfb40f68390945a1ed88b73", "c355cfe898f8471e84966da16772be1e")
 
-
+open_amz(hue)
 
 def process_query(command, hue)
   p '=============================================================='
@@ -94,8 +95,6 @@ def process_query(command, hue)
     process_ambient(command, hue) #held within light module
   end
 end
-
-
 
 get '/command' do
   process_query(params[:q], hue)

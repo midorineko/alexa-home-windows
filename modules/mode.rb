@@ -1,5 +1,4 @@
 def process_mode(command, hue)
-  words = command.split(" ")
   light1, light2, light3 = hue.lights
 
   if command.scan(/smoke | smoking/).length > 0
@@ -18,7 +17,7 @@ def process_mode(command, hue)
       WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
       Launchy.open ('https://open.spotify.com/user/1215877715/playlist/6WkKK7hw0ZWttRrdPMXIbG')
     end
-  elsif command.scan(/valve | volvo | doda | dota/).length > 0
+  elsif command.scan(/valve|volvo|doda|dota/).length > 0
     WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
     light1.on!
     light2.on!
@@ -27,7 +26,7 @@ def process_mode(command, hue)
     light2.red
     light3.red
     Launchy.open ('https://open.spotify.com/user/1215877715/playlist/3XUn5HVXEWi88raARlpshs')
-  elsif command.scan(/coder | programmer/).length > 0
+  elsif command.scan(/coder|programmer/).length > 0
     WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
     light1.on!
     light2.on!
