@@ -18,7 +18,7 @@ def process_mode(command, hue)
       WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
       Launchy.open ('https://open.spotify.com/user/1215877715/playlist/6WkKK7hw0ZWttRrdPMXIbG')
     end
-  elsif command.scan(/valve | volvo/).length > 0
+  elsif command.scan(/valve | volvo | doda | dota/).length > 0
     WIN32OLE.new("WScript.Shell").SendKeys("^{F8}")
     light1.on!
     light2.on!

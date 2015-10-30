@@ -70,6 +70,10 @@ def process_query(command, hue)
     p 'Speakers'
     WIN32OLE.new("WScript.Shell").SendKeys("^{F11}") #held within the light module
     process_audio('speakers', hue)
+  elsif command.scan(/microphone/).length > 0
+    p 'Speakers'
+    WIN32OLE.new("WScript.Shell").SendKeys("^{F10}") #held within the light module
+    process_audio('speakers', hue)
   elsif command.scan(/louder/).length > 0
     p 'Volume Up'
     WIN32OLE.new("WScript.Shell").SendKeys("^{F3}")#held within the light module

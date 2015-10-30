@@ -34,31 +34,17 @@ This has to be run on the same network your Hue is on, but not necessarily the s
 
 3) If you plan on using a Hue setup, press the button on top of your Hue unit
 
-4) Type `chmod +x startupScript.sh && ./startupScript.sh`
-chmod +x startupScript.sh && ./startupScript.sh
+4) Go to your echo application on the browser, find the settings tab, go to history, open up the console then paster the monitoring snippet.
+---really sorry that isn't easier on windows. I'll figure out a way soon, since it is so kinda sucks.
 
-5) This will start Alexa Home in the background. To stop Alexa Home, see "Stopping Alexa Home"
+ 5)I run the program with ruby app.rb like normal.
 
-## Existing Modules
-
-1) Itunes
-
-2) Spotify
-
-## Module Roadmap
-
-I'd love to get these resolvers/modules done at some point too:
-
-1) Spotify find a users tracks
-  ~write a double or tripple random script for actualy shuffle mode
-
-2) Posting tweets onto twitter
-  ~have her read you back the recent tweets, which is a little ways off
-
-3) Speaker switching
-  ~switch where music is being played from, and which device is sending the sound.
-
-## Stopping Alexa Home
+ Current Modules
+ -Hue lights
+ -Basic Spotify
+ -Computer Controle
+ -itunes(zach)
+ -twitch and weather html stuff
 
 1) Type `ps aux | grep ruby` at the Terminal to see a list of running Ruby processes
 
